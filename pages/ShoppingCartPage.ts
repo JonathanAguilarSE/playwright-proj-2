@@ -34,7 +34,7 @@ export class ShoppingCartPage {
         this.discount = page.locator('[data-testid="discount"]');
         this.addBtn = page.locator('[id*="course"] button');
         this.itemsInCartText = page.locator('.mb-2');
-        this.cartItems = page.locator('[class^="BMnRK"]');
+        this.cartItems = page.locator('[class$="BMnRK"]');
         this.totalPrice = page.locator('#total-price');
         this.placeOrderBtn = page.locator('.mt-3');
 

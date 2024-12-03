@@ -94,18 +94,20 @@ test.describe("Shopping Cart", () => {
         })
 
         await test.step("3. Validate that the course is displayed in the cart with its image, name, and discount amount if available", async () => {
-            const itemsCount = await shoppingCartPage.cartItems.count();
-            expect(itemsCount).toBeGreaterThan(0);
+            const itemsCount = await shoppingCartPage.cartItems.count()
+            // console.log(itemsCount)
+            expect(itemsCount).toBeGreaterThan(0)
 
-            const courseImage = await shoppingCartPage.cartItems.nth(0).locator('img').isVisible();
-            expect(courseImage).toBeFalsy();
+            const courseImage = await shoppingCartPage.cartItems.nth(0).locator('img').isVisible()
+            expect(courseImage).toBeTruthy()
           
-            const courseName = await shoppingCartPage.cartItems.nth(0).locator('h3').textContent();
-            expect(courseName).not.toBeNull();
+            const courseName = await shoppingCartPage.cartItems.nth(0).locator('h3').textContent()
+
+            expect(courseName?.trim().length).toBeGreaterThan(0)
           
-            const discount = await shoppingCartPage.discount.nth(0).textContent();
+            const discount = await shoppingCartPage.discount.nth(0).textContent()
             if (discount) {
-              expect(discount).not.toBeNull();
+              expect(discount).not.toBeNull()
             }
         })
 
