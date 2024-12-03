@@ -98,14 +98,14 @@ test.describe("Shopping Cart", () => {
             // console.log(itemsCount)
             expect(itemsCount).toBeGreaterThan(0)
 
-            const courseImage = await shoppingCartPage.cartItems.nth(0).locator('img').isVisible()
+            const courseImage = await shoppingCartPage.cartItems.first().locator('img').isVisible()
             expect(courseImage).toBeTruthy()
           
-            const courseName = await shoppingCartPage.cartItems.first().locator('h3').textContent()
-            console.log(courseName)
+            // const courseName = await shoppingCartPage.cartItems.first().locator('h3').textContent()
+            // console.log(courseName)
             // expect(courseName?.trim().length).toBeGreaterThan(0)
           
-            const discount = await shoppingCartPage.discount.nth(0).textContent()
+            const discount = await shoppingCartPage.discount.first().textContent()
             if (discount) {
               expect(discount).not.toBeNull()
             }
