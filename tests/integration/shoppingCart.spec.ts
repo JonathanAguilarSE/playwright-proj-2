@@ -76,7 +76,7 @@ test.describe("Shopping Cart", () => {
         await test.step("4. Validate that the total price is zero “$0” by default", async () => {
             const totalNumberText = await shoppingCartPage.totalPrice.textContent()
             // console.log(totalNumberText)
-            const numbersOnly = Number(totalNumberText?.split("").filter(char => /[0-9]/.test(char)))
+            const numbersOnly = Number(totalNumberText?.replace(/[^0-9]/g, ""))
             expect(numbersOnly).toEqual(0)
         })
 
@@ -90,13 +90,65 @@ test.describe("Shopping Cart", () => {
     test("Test Case 03 - Add a Course to the Cart and Validate", async ({ shoppingCartPage}) => {
 
         await test.step("2. Click on the “Add to Cart” button for one of the courses", async () => {
-            const sdetCourse = shoppingCartPage.addBtn.first()
-            await sdetCourse.click()
+            await shoppingCartPage.addToCart(0)
         })
 
         await test.step("3. Validate that the course is displayed in the cart with its image, name, and discount amount if available", async () => {
-            await expect(shoppingCartPage.cartItems).toBeVisible()
-            
+            const itemsCount = await shoppingCartPage.cartItems.count();
+            expect(itemsCount).toBeGreaterThan(0);
+
+            const courseImage = await shoppingCartPage.cartItems.nth(0).locator('img').isVisible();
+            expect(courseImage).toBeFalsy();
+          
+            const courseName = await shoppingCartPage.cartItems.nth(0).locator('h3').textContent();
+            expect(courseName).not.toBeNull();
+          
+            const discount = await shoppingCartPage.discount.nth(0).textContent();
+            if (discount) {
+              expect(discount).not.toBeNull();
+            }
+        })
+
+        // await test.step("4. Validate that the course price is added to the total price excluding the discount amount", async () => {
+        // })
+
+        await test.step("5. Click on the “Place Order” button", async () => {
+            await shoppingCartPage.placeOrderBtn.click()
+        })
+
+        await test.step("6. Validate a success message is displayed with the text “Your order has been placed.”", async () => {
+            await expect(shoppingCartPage.successMsg).toHaveText("Your order has been placed.")
+        })
+
+        await test.step("7. Validate that the cart is empty", async () => {
+            await expect(shoppingCartPage.cartItems).toHaveCount(0)
+        })
+    })
+
+    test("Test Case 04 - Add Two Courses to the Cart and Validate", async ({ shoppingCartPage}) => {
+
+        await test.step('2. Click on the “Add to Cart” button for one of the courses', async () => {
+            await shoppingCartPage.addToCart(0);
+        });
+    
+        await test.step('3. Click on the “Add to Cart” button for another course', async () => {
+            await shoppingCartPage.addToCart(1);
+        });
+    
+
+        // await test.step("4. Validate that the course price is added to the total price excluding the discount amount", async () => {
+        // })
+
+        await test.step("6. Click on the “Place Order” button", async () => {
+            await shoppingCartPage.placeOrderBtn.click()
+        })
+
+        await test.step("7. Validate a success message is displayed with the text “Your order has been placed.”", async () => {
+            await expect(shoppingCartPage.successMsg).toHaveText("Your order has been placed.")
+        })
+
+        await test.step("8. Validate that the cart is empty", async () => {
+            await expect(shoppingCartPage.cartItems).toHaveCount(0)
         })
     })
 
