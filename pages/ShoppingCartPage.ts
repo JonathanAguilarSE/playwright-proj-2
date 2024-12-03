@@ -11,15 +11,15 @@ export class ShoppingCartPage {
     readonly discount: Locator
     readonly addBtn: Locator
     readonly itemsInCartText: Locator
-    readonly cartItems: Locator;
-    readonly totalPrice: Locator;
-    readonly placeOrderBtn: Locator;
+    readonly cartItems: Locator
+    readonly totalPrice: Locator
+    readonly placeOrderBtn: Locator
     
-    readonly cartImgs: Locator;
-    readonly cartNames: Locator;
-    readonly cartDiscounts: Locator;
+    readonly cartImgs: Locator
+    readonly cartNames: Locator
+    readonly cartDiscounts: Locator
 
-    readonly successMsg: Locator;
+    readonly successMsg: Locator
 
 
 
@@ -28,29 +28,29 @@ export class ShoppingCartPage {
         this.headerText = page.locator('h1.mt-2')
         this.availableCourses = page.locator('[id*="course"]')
         this.courseImg = page.locator('img[alt^="Course"]')
-        this.courseNames = page.locator('.columns h3');
-        this.schoolTag = page.locator('.my-3');
-        this.price = page.locator('[data-testid="full-price"]');
-        this.discount = page.locator('[data-testid="discount"]');
-        this.addBtn = page.locator('[id*="course"] button');
-        this.itemsInCartText = page.locator('.mb-2');
-        this.cartItems = page.locator('[class$="BMnRK"]');
-        this.totalPrice = page.locator('#total-price');
-        this.placeOrderBtn = page.locator('.mt-3');
+        this.courseNames = page.locator('.columns h3')
+        this.schoolTag = page.locator('.my-3')
+        this.price = page.locator('[data-testid="full-price"]')
+        this.discount = page.locator('[data-testid="discount"]')
+        this.addBtn = page.locator('[id*="course"] button')
+        this.itemsInCartText = page.locator('.mb-2')
+        this.cartItems = page.locator('[class$="BMnRK"]')
+        this.totalPrice = page.locator('#total-price')
+        this.placeOrderBtn = page.locator('.mt-3')
 
-        this.cartImgs = page.locator('[class$="BMnRK"] img');
-        this.cartNames = page.locator('[class$="BMnRK"] img');
-        this.cartDiscounts = page.locator('[class$="BMnRK"] img');
+        this.cartImgs = page.locator('[class$="BMnRK"] img')
+        this.cartNames = page.locator('[class$="BMnRK"] img')
+        this.cartDiscounts = page.locator('[class$="BMnRK"] img')
 
-        this.successMsg = page.locator('.is-success');
+        this.successMsg = page.locator('.is-success')
     }
 
     async goto() {
-        await this.page.goto('https://www.techglobal-training.com/frontend/project-8');
+        await this.page.goto('https://www.techglobal-training.com/frontend/project-8')
     }
 
     async addToCart( num: number ) {
-        await this.addBtn.nth(num).click();
+        await this.addBtn.nth(num).click()
     }
 
 }
